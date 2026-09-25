@@ -1,198 +1,171 @@
-<div align="center">
+# 🧭 VoyageSync — AI Event & Travel Concierge
 
-<img src="assets/build-with-gemini-banner.png" alt="Build with Gemini" width="100%" />
+A personalized travel and group event concierge built with the **Google Agent Development Kit (ADK)** and **Gemini 3.6 Flash**. VoyageSync helps travelers and groups organize, explore, and share multi-day itineraries, check live local weather and attractions, calculate shared budgets, and generate visual postcard banners.
 
-# 🚀 Build with Gemini · Track 3
-
-### The starter kit for Track 3 of the Build with Gemini World Tour, and a showcase of what participants built with it.
-
-Clone this repo, open [Antigravity](https://antigravity.google), and build your own agent-first app on Google Cloud. Every project in the [gallery below](#-featured-projects) was built the same way: prototyped with Antigravity and `agents-cli`, equipped with Memory, tools, and storage, deployed to Agent Platform, and given a face on Cloud Run.
-
-<br/>
-
-![Build with Gemini](https://img.shields.io/badge/Build%20with%20Gemini-World%20Tour-4285F4?logo=google&logoColor=white)
-![Track 3](https://img.shields.io/badge/Track%203-Agent--First%20Apps-EA4335)
-![Google Cloud](https://img.shields.io/badge/Google%20Cloud-Agent%20Platform-4285F4?logo=googlecloud&logoColor=white)
-![Built with ADK](https://img.shields.io/badge/Built%20with-ADK%20%2B%20agents--cli-34A853)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
-![Projects](https://img.shields.io/badge/Projects-8-blue)
-
-<sub>📖 <a href="https://cszhu.github.io/build-with-gemini/">Lab Guide</a> · 🛠️ <a href="https://google.github.io/agents-cli/guide/getting-started/">agents-cli</a> · 🤖 <a href="https://google.github.io/adk-docs/">ADK</a></sub>
-
-</div>
+<p align="center">
+  <img src="demo.gif" alt="VoyageSync Demo Recording" width="750" />
+</p>
 
 ---
 
-## 📚 Table of Contents
+## 🌟 What VoyageSync Does
 
-- [🧩 Anatomy of a Track 3 Project](#-anatomy-of-a-track-3-project)
-- [📂 Featured Projects](#-featured-projects)
-  - [🛍️ Commerce & Marketplace Agents](#️-commerce--marketplace-agents)
-  - [🍳 Food & Recipe Agents](#-food--recipe-agents)
-  - [✈️ Travel & Local Agents](#️-travel--local-agents)
-  - [💪 Health, Fitness & Wellness Agents](#-health-fitness--wellness-agents)
-  - [📚 Learning & Knowledge Agents](#-learning--knowledge-agents)
-  - [🎨 Creative & Media Agents](#-creative--media-agents)
-  - [🏢 Productivity & Enterprise Agents](#-productivity--enterprise-agents)
-  - [🧪 Experimental & Other](#-experimental--other)
-- [🧠 What's in this Repo](#-whats-in-this-repo)
-- [🧰 Build Your Own](#-build-your-own)
-- [📚 Resources](#-resources)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
+VoyageSync connects reasoning capabilities with Google Cloud services to manage travel logistics across conversations:
+
+- **Group Itinerary Management:** Stores, queries, and updates multi-day trip activities with dates, locations, costs, and notes backed by Cloud Firestore.
+- **Cross-Session Long-Term Memory:** Retains travel party preferences, dietary restrictions, past destinations, and budget limits across separate sessions using Vertex AI Memory Bank.
+- **Live Destination Exploration & Weather:** Discovers points of interest and landmarks using OpenStreetMap Nominatim and fetches real-time temperature, wind, and sky conditions via Open-Meteo.
+- **AI Media Generation & Asset Storage:** Generates custom postcard-style trip banners using Gemini 3.1 Flash Lite Image and uploads them to Google Cloud Storage.
+- **Safe Code Execution for Expense Splitting:** Runs a remote Agent Engine Sandbox to perform budget math and cost-per-person calculations.
+- **Rich Card UI (A2UI):** Emits structured cards, columns, and rows rendered inline in both the ADK Playground and the custom chat frontend.
 
 ---
 
-## 🧩 Anatomy of a Track 3 Project
+## ☁️ Google Cloud Services & Architecture
 
-Every app in this collection is built from the same set of Google Cloud building blocks introduced in the lab. Once you understand this shape, you can read any project here at a glance:
+Every capability in VoyageSync maps directly to wired implementations in `voyage-sync/app/agent.py`:
 
-| Layer | What it does | Powered by |
-|---|---|---|
-| 🤖 **The Agent** | The core reasoning loop | [ADK](https://google.github.io/adk-docs/) + [`agents-cli`](https://google.github.io/agents-cli/guide/getting-started/), scaffolded with [Antigravity](https://antigravity.google) |
-| 🧠 **Memory** | Remembers facts across sessions | [Agent Platform Memory Bank](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/memory-bank) |
-| 🗄️ **Structured data** | Inventory, records, lists | [Firestore](https://console.cloud.google.com/firestore) |
-| 🖼️ **Files & blobs** | Images, media, assets | [Cloud Storage](https://console.cloud.google.com/storage) |
-| 🔧 **Tools** | Take real actions and fetch real data | ADK function tools |
-| 🎨 **Media generation** | Creates images (and video) on demand | `gemini-3.1-flash-lite-image` (Nano Banana 2 Lite) · Omni (video) |
-| 🧪 **Code sandbox** | Safely runs generated code | Agent Platform code execution |
-| 🪟 **Agent-first UI** | Cards and tables instead of plain text | [A2UI](https://adk.dev/integrations/a2ui/) |
-| 🌐 **Frontend** | A shareable web face | FastAPI proxy on [Cloud Run](https://cloud.google.com/run) |
-
----
-
-## 📂 Featured Projects
-
-A showcase of what workshop participants built with this lab. Entries are added here from the swag and gallery submission form after each event, so the categories below start empty and fill in over time. Browse them for inspiration, or [submit your own](#-contributing) once you've published your project with the `publish-to-github` skill.
-
-<!--
-Add one entry per project, in this format:
-- 🌿 **[Project Name](https://github.com/their-handle/their-repo)**: one-line description of what it does. <br/> <sub>by [@handle](https://github.com/handle)</sub>
-
-Bump the "Projects" badge count at the top when you add one.
--->
-
-### 🛍️ Commerce & Marketplace Agents
-
-### 🍳 Food & Recipe Agents
-
-- 🥫 **[Smart Pantry Recipe Concierge](https://github.com/matthewrose/buildwithgemini-smart-pantry-recipe-concierge)**: Tracks your pantry and recommends recipes grounded in a real recipe corpus. <br/> <sub>by [@matthewrose](https://github.com/matthewrose)</sub>
-
-### ✈️ Travel & Local Agents
-
-- ⛈️ **[SafeStageWX](https://github.com/felix1028/buildwithgemini-safestagewx)**: An agentic mobile app that helps event planners identify weather threats and climate risks for an event given its date and location, providing tailored preparedness timelines from months out down to hourly day-of forecasts. <br/> <sub>by [@felix1028](https://github.com/felix1028)</sub>
-- 🌇 **[Sidewalk & Sun](https://github.com/OlafHaalstra/buildwithgemini-sidewalk-and-sun)**: Recommends sunny or shaded NYC spots from a curated 500-venue corpus, plotted on an interactive map. <br/> <sub>by [@OlafHaalstra](https://github.com/OlafHaalstra)</sub>
-
-### 💪 Health, Fitness & Wellness Agents
-
-- 🏊 **[TriCoach AI](https://github.com/common-aman/buildwithgemini-tricoach-ai)**: A triathlon coach that logs workouts, computes training zones, and generates motivational visuals. <br/> <sub>by [@common-aman](https://github.com/common-aman)</sub>
-
-### 📚 Learning & Knowledge Agents
-
-- 🎤 **[Interview Coach (PrepPal)](https://github.com/VineethBaradi/buildwithgemini-interview-coach)**: A mock-interview coach that runs LLM-driven practice sessions from a Firestore question bank and gives performance feedback. <br/> <sub>by [@VineethBaradi](https://github.com/VineethBaradi)</sub>
-
-### 🎨 Creative & Media Agents
-
-### 🏢 Productivity & Enterprise Agents
-
-- 🔧 **[GitCraft](https://github.com/fpobletemu/buildwithgemini-gitcraft)**: A developer git assistant that inspects your repo and drafts Conventional-Commits-style messages, grounded in a commit-style guide. <br/> <sub>by [@fpobletemu](https://github.com/fpobletemu)</sub>
-- 🖥️ **[IT Helpdesk Agent](https://github.com/NaweedAhmadi/buildwithgemini-it-helpdesk-agent)**: An IT support assistant that answers from a knowledge base and remembers context across sessions, with a ticket dashboard UI. <br/> <sub>by [@NaweedAhmadi](https://github.com/NaweedAhmadi)</sub>
-
-### 🧪 Experimental & Other
-
-- 🃏 **[Poker Agent](https://github.com/jakecho1108/buildwithgemini-poker-agent)**: A poker trainer with a real 800-iteration Monte Carlo equity engine and strategy tips grounded in a poker playbook. <br/> <sub>by [@jakecho1108](https://github.com/jakecho1108)</sub>
+| Service / Capability | Implementation Details | Wired In Code |
+| :--- | :--- | :--- |
+| **Gemini 3.6 Flash** | Core reasoning and orchestration model | `google.adk.models.Gemini` (`gemini-3.6-flash`) |
+| **Vertex AI Memory Bank** | Long-term memory extraction and preloading across sessions | `VertexAiMemoryBankService`, `PreloadMemoryTool`, `generate_memories_callback` |
+| **Cloud Firestore** | Structured storage for itinerary activities and schedules | `google.cloud.firestore`, collection `itinerary_items` |
+| **Cloud Storage** | Public hosting for generated trip banner artwork | `google.cloud.storage.Client`, bucket storage |
+| **Gemini 3.1 Flash Lite Image** | On-demand postcard and banner image synthesis | `google.genai.Client` (`gemini-3.1-flash-lite-image`) |
+| **Agent Engine Code Sandbox** | Isolated Python execution environment for budget calculations | `AgentEngineSandboxCodeExecutor` |
+| **A2UI (v0.8 Basic Catalog)** | Dynamic UI component generation (Card, Column, Row, Text, Image) | `A2uiSchemaManager`, `BasicCatalog`, `a2ui_callback` |
+| **FastAPI + A2A Web Frontend** | Branded chat UI communicating over the Agent-to-Agent protocol | `frontend/main.py`, `frontend/static/index.html` |
 
 ---
 
-## 🧠 What's in this Repo
+## 🛠️ Implemented Agent Tools
 
-The `.agents/` folder teaches Antigravity how to build agents on Google Cloud.
+The agent is equipped with the following functions registered in `root_agent.tools`:
 
-### Skills
+1. `PreloadMemoryTool()`: Automatically loads relevant long-term memories and user facts into context at the beginning of each turn.
+2. `list_itinerary_items(category, day)`: Queries the Firestore database for scheduled events, with optional filters for category (e.g. *Sightseeing*, *Dining*, *Culture*, *Adventure*) or day (e.g. *Day 1*, *Day 2*).
+3. `add_itinerary_item(title, category, day, time, location, cost_per_person, description, notes)`: Creates and persists a new activity with unique identifier into Firestore.
+4. `get_itinerary_item(item_id)`: Retrieves full record details for a specific itinerary item.
+5. `search_places_and_attractions(query, limit)`: Queries the OpenStreetMap Nominatim API to find real-world landmarks, coordinates, and venues.
+6. `get_weather(location)`: Fetches current temperature, humidity, wind speed, and sky conditions using the Open-Meteo forecast API.
+7. `get_current_time(query)`: Calculates the local current time and timezone for requested destinations.
+8. `generate_trip_image(prompt)`: Synthesizes high-resolution postcard banners via `gemini-3.1-flash-lite-image`, registers the artifact in the ADK session, uploads to Cloud Storage, and returns a public URL.
 
-A **skill** is a bundle of instructions that loads automatically when it's relevant, so the agent gets the workflow right in fewer steps instead of rediscovering it each time.
+### 📋 Feature Status & Scope
 
-| Skill | What it does |
-| --- | --- |
-| [`pick-your-agent-project`](.agents/skills/pick-your-agent-project/SKILL.md) | Brainstorm your app idea and write a project brief |
-| [`troubleshoot-lab-setup`](.agents/skills/troubleshoot-lab-setup/SKILL.md) | Verify your environment and fix common setup errors |
-| [`memory-bank-setup`](.agents/skills/setup-memory-bank/SKILL.md) | Add cross-session memory to your agent with Vertex AI Memory Bank |
-| [`enable-a2ui`](.agents/skills/enable-a2ui/SKILL.md) | Make your agent reply with rich UI cards (A2UI) in the ADK dev UI |
-| [`build-agent-frontend`](.agents/skills/build-agent-frontend/SKILL.md) | Generate a FastAPI chat frontend and ship it to Cloud Run |
-| [`record-demo`](.agents/skills/record-demo/SKILL.md) | Record a branded demo video of your agent, with an optional AI soundtrack |
-| [`publish-to-github`](.agents/skills/publish-to-github/SKILL.md) | Publish your finished project to your own GitHub and submit it for swag |
-
-### Pre-configured tools (MCP)
-
-[`.agents/mcp_config.json`](.agents/mcp_config.json) wires up two [Model Context Protocol](https://modelcontextprotocol.io/) servers that authenticate with your gcloud credentials, so the agent can look things up instead of guessing:
-
-- **Firebase**: work directly with Firestore and other Firebase services
-- **Google Developer Knowledge**: grounded access to Google's official docs (Cloud, Firebase, ADK, Agent Platform)
-
-### Layout
-
-```text
-.agents/
-├── mcp_config.json    # Firebase + Developer Knowledge MCP servers
-├── rules/             # workspace rules (only deploy when asked)
-└── skills/            # the workshop skills listed above
-```
+- **Implemented:** Firestore itinerary CRUD, Memory Bank persistence, live weather, places lookup, code sandbox execution, image generation + Cloud Storage upload, A2UI cards, and FastAPI A2A chat proxy.
+- **Planned, Not Yet Implemented:** Automated calendar export (.ics / Google Calendar synchronization), multi-user collaborative voting on activities, and export of Cloud Trace telemetry.
 
 ---
 
-## 🧰 Build Your Own
+## 🚀 Local Setup & Run Guide
 
-The full, step-by-step walkthrough lives on the **[lab guide](https://cszhu.github.io/build-with-gemini/)**. This is the short version.
+### Prerequisites
 
-**Prerequisites** (the lab workstation comes with all of this pre-installed; you'll need it if you're running on your own machine):
+- Python 3.11+
+- [uv](https://docs.astral.sh/uv/) (Python package manager)
+- [Google Cloud SDK (`gcloud`)](https://cloud.google.com/sdk/docs/install)
+- An active Google Cloud project with Vertex AI and Firestore enabled
 
-- A **Google Cloud project** with billing enabled
-- **[Antigravity](https://antigravity.google)** (`agy`), the coding agent that loads the skills above
-- **[agents-cli](https://google.github.io/agents-cli/guide/getting-started/)**, built on the [Agent Development Kit (ADK)](https://google.github.io/adk-docs/)
-- Authenticated gcloud: `gcloud auth login` and `gcloud auth application-default login`
-- A personal **GitHub account** for the final publish-and-submit step
-
-**Quickstart:**
+### 1. Authenticate with Google Cloud
 
 ```bash
-git clone https://github.com/cszhu/build-with-gemini
-cd build-with-gemini
-agy
+gcloud auth login
+gcloud auth application-default login
+gcloud config set project <YOUR_PROJECT_ID>
 ```
 
-On startup, Antigravity scans the `.agents/` folder and loads the skills and tools above automatically. In the AGY prompt:
+### 2. Configure Environment Variables
 
-```text
-/skills            # see the installed skills
-/mcp               # confirm the firebase + google-developer-knowledge tools are connected
+Navigate to the agent directory and set up your `.env` file:
+
+```bash
+cd voyage-sync
+cp .env.example .env
 ```
 
-```text
-Verify my setup.   # runs the troubleshoot-lab-setup skill to check your environment
+Ensure your `.env` contains:
+
+```bash
+PROJECT_ID=<YOUR_PROJECT_ID>
+LOCATION=us-east1
+GCS_BUCKET_NAME=<YOUR_STORAGE_BUCKET>
+MEMORY_BANK_ID=<YOUR_MEMORY_BANK_ID>
+AGENT_ENGINE_SANDBOX_RESOURCE_NAME=<YOUR_SANDBOX_RESOURCE_NAME>
 ```
 
-Then follow the [lab guide](https://cszhu.github.io/build-with-gemini/) to design, build, deploy, and share your agent, start to finish.
+### 3. Install Dependencies
+
+```bash
+# In voyage-sync/
+uv sync
+```
+
+### 4. Seed the Itinerary Database (Optional)
+
+To populate Firestore with initial sample activities:
+
+```bash
+uv run python scripts/seed_firestore.py
+```
+
+### 5. Run the Local Development Environment
+
+You can interact with VoyageSync through either the ADK development playground or the custom frontend.
+
+#### Option A: ADK Playground (`adk web`)
+
+```bash
+uv run adk web . --port 8000 --reload_agents --memory_service_uri=agentengine://<YOUR_MEMORY_BANK_ID>
+```
+
+#### Option B: Custom Web Chat UI
+
+1. Set up the frontend dependencies:
+   ```bash
+   cd frontend
+   python -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+2. Start the local FastAPI proxy:
+   ```bash
+   export AGENT_ENGINE_RESOURCE_NAME="projects/<PROJECT_NUMBER>/locations/us-east1/reasoningEngines/<REASONING_ENGINE_ID>"
+   export AGENT_DIRECTORY="app"
+   export PORT=8080
+   python main.py
+   ```
+
+3. Open a browser to start planning trips.
 
 ---
 
-## 📚 Resources
+## 📂 Repository Structure
 
-- **[Lab guide](https://cszhu.github.io/build-with-gemini/)**: the step-by-step workshop
-- [Antigravity](https://antigravity.google)
-- [agents-cli](https://google.github.io/agents-cli/guide/getting-started/)
-- [Agent Development Kit (ADK)](https://google.github.io/adk-docs/)
-- [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform)
-
----
-
-## 🤝 Contributing
-
-**Built something?** Publish it with the `publish-to-github` skill and submit it through the form it gives you. Submissions get you swag, and standout projects get added to the [Featured Projects](#-featured-projects) gallery above.
-
-**Found a bug?** If you hit a rough edge in a skill or the lab, please [open an issue](https://github.com/cszhu/build-with-gemini/issues).
+```
+.
+├── demo.gif                      # Looping demonstration recording
+├── voyage_sync_demo.webm         # Source WebM recording
+├── project_brief.md              # Original design brief and tool coverage
+└── voyage-sync/
+    ├── agents-cli-manifest.yaml  # Agent deployment configuration
+    ├── pyproject.toml            # Dependencies and project metadata
+    ├── app/
+    │   ├── __init__.py
+    │   ├── agent.py              # Core Agent, tools, Memory Bank, and A2UI wiring
+    │   └── a2ui_utils.py         # Callback formatting A2UI parts for A2A
+    ├── frontend/
+    │   ├── main.py               # FastAPI proxy talking A2A protocol
+    │   ├── requirements.txt      # Frontend server dependencies
+    │   └── static/
+    │       └── index.html        # Dialogue chat UI with A2UI renderer
+    └── scripts/
+        └── seed_firestore.py     # Firestore database seeder
+```
 
 ---
 
 ## 📄 License
 
-This is not an officially supported Google product and is provided for the Build with Gemini workshop for demonstration purposes only.
+This project was built for the Build with Gemini World Tour and is licensed under the Apache License 2.0.
